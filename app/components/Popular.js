@@ -28,7 +28,7 @@ const RepoGrid = props => {
     <ul className="popular-list">
       {props.repos.map((repo, index) => {
         return (
-          <li key={repo.name} className="popular-item">
+          <li key={repo.name} className="popular-item card">
             <div className="popular-rank">
               #{index + 1}
             </div>
@@ -103,7 +103,7 @@ class Popular extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <SelectLanguage
           onSelect={this.updateLanguage}
           selectedLanguage={this.state.selectedLanguage}
