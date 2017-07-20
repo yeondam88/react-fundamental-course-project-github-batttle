@@ -3,6 +3,7 @@ import { battle } from "../utils/api";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import PlayerPreview from "./PlayerPreview";
+import Loading from "./Loading";
 
 const queryString = require("query-string");
 
@@ -109,7 +110,7 @@ class Results extends Component {
     const loading = this.state.loading;
 
     if (loading) {
-      return <p>Loading...</p>;
+      return <Loading />;
     }
 
     if (error) {

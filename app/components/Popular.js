@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { fetchPopularRepos } from "../utils/api";
+import Loading from "./Loading";
 
 const SelectLanguage = props => {
   const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
@@ -109,7 +110,7 @@ class Popular extends Component {
           selectedLanguage={this.state.selectedLanguage}
         />
         {!this.state.repos
-          ? <p>Loading...</p>
+          ? <Loading />
           : <RepoGrid repos={this.state.repos} />}
       </div>
     );
