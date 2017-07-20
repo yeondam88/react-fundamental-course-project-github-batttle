@@ -1,12 +1,13 @@
 var path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var webpack = require("webpack");
+require("babel-polyfill");
 
 // NODE_ENV to production
 // Uglify
 
 const config = {
-  entry: "./app/index.js",
+  entry: ["babel-polyfill", "./app/index.js"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "index_bundle.js",

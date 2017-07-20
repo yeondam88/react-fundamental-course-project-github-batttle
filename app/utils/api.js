@@ -1,15 +1,16 @@
 import axios from "axios";
 
-const getProfile = username => {
-  return axios.get("https://api.github.com/users/" + username).then(user => {
-    return user.data;
-  });
+const getProfile = async username => {
+  const user = await axios.get("https://api.github.com/users/" + username);
+  return user.data;
 };
 
-const getRepos = username => {
-  return axios.get(
+const getRepos = async username => {
+  const repos = await axios.get(
     "https://api.github.com/users/" + username + "/repos" + "?per_page=100"
   );
+
+  return repos;
 };
 
 const getStarCount = repos => {
@@ -25,17 +26,15 @@ const calculateScore = (profile, repos) => {
   return followers * 3 + totalStars;
 };
 
-const getUserData = player => {
-  return axios.all([getProfile(player), getRepos(player)]).then(data => {
-    const profile = data[0];
-    const repos = data[1];
-    console.log(repos);
+const getUserData = async player => {
+  const info = await Promise.all([getProfile(player), getRepos(player)]);
+  const profile = info[0];
+  const repos = info[1];
 
-    return {
-      profile: profile,
-      score: calculateScore(profile, repos)
-    };
-  });
+  return {
+    profile,
+    score: calculateScore(profile, repos)
+  };
 };
 
 const sortPlayers = players => {
@@ -49,19 +48,21 @@ const handleError = error => {
   return null;
 };
 
-export const fetchPopularRepos = language => {
+export const fetchPopularRepos = async language => {
   const encodedURI = window.encodeURI(
     `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`
   );
+  const repos = await axios.get(encodedURI);
 
-  return axios.get(encodedURI).then(response => {
-    return response.data.items;
-  });
+  return repos.data.items;
 };
 
-export const battle = players => {
-  return axios
-    .all(players.map(getUserData))
-    .then(sortPlayers)
-    .catch(handleError);
+export const battle = async players => {
+  try {
+    const result = await Promise.all(players.map(getUserData));
+    const sorted = sortPlayers(result);
+    return sorted;
+  } catch (error) {
+    handleError(error);
+  }
 };
