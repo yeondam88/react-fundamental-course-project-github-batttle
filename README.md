@@ -3,7 +3,7 @@ Github Battle Web app with React
 
 This tutorial by Tyler Mcginnis to learn React fundamental.
 
-### It hosted on Firebase [Demo](https://react-github-battle-c645b.firebaseapp.com/)
+###It hosted on Firebase [Demo](https://react-github-battle-c645b.firebaseapp.com/)
 
 ###Tech Stacks
   + Babel
@@ -16,8 +16,6 @@ If you want to run as locally,
 
 ```
 npm install
-
-then 
 
 npm start
 ```
