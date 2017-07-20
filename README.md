@@ -3,9 +3,9 @@ Github Battle Web app with React
 
 This tutorial by Tyler Mcginnis to learn React fundamental.
 
-###It hosted on Firebase [Demo](https://react-github-battle-c645b.firebaseapp.com/)
+It hosted on Firebase [Demo](https://react-github-battle-c645b.firebaseapp.com/)
 
-###Tech Stacks
+Tech Stacks
   + Babel
   + Webpack
   + axios
